@@ -4,19 +4,77 @@ import ProductCard from "../../components/2.state/product";
 import productList from "../../__mock__/products.json";
 
 function State3() {
-  /*
+  console.log(productList);
+
+  const navigate = useNavigate();
+
+  //해당 상품의 detailPage로 이동하는 주소
+  const onNavigateDetailPage = (number) => {
+    navigate(`/state/detail/${number}`);
+  };
+
+  return (
+    <>
+      <h1>문제3</h1>
+      <h2>상품 목록</h2>
+      <ul>
+        {/*productList에 있는 product를 하나씩 렌더링
+        poductCard를 누르면 해당 detailPage로 이동*/}
+        {/*productCard에 넘겨주는 props를 구조분해 할당으로 정보를 넘김*/}
+        {productList.products.map(
+          ({
+            productName,
+            productPrice,
+            productSize,
+            productRating,
+            productReview,
+            productNumber,
+          }) => {
+            return (
+              <ProductCard
+                onNavigate={() => {
+                  onNavigateDetailPage(productNumber);
+                }}
+                name={productName}
+                price={productPrice}
+                size={productSize}
+                rating={productRating}
+                review={productReview}
+                number={productNumber}
+              />
+            );
+          }
+        )}
+      </ul>
+    </>
+  );
+}
+export default State3;
+
+const Item = styled.li`
+  border: 1px solid #000;
+  cursor: pointer;
+  width: 300px;
+  margin: 16px auto;
+`;
+
+const S = {
+  Item,
+};
+
+/*
     문제 3.
     심화문제 입니다
     
     아래는 가상의 커머스 사이트 mock data입니다
 
     요구 사항
-
-    1. 구매후기 및 상제를 제외한 데이터의 모든 정보는 화면에 노출되어야 합니다.
+ 
+    1. 구매후기 및 상제를 제외한 데이터의 모든 정보는 화면에 노출되어야 합니다. ===> 완
         단, 가격표는 3자리마다 ,를 작성해야합니다.
 
-    2. 해당 상품을 클릭하면 상세 페이지로 이동합니다.
-    
+    2. 해당 상품을 클릭하면 상세 페이지로 이동합니다. ===> 완 
+     
     3.
       상세페이지 주소에는 클릭한 상품의 상품번호가 노출되어야 합니다
       해당 router (주소설정)은 제가 모두 app.js에 해두었습니다
@@ -39,36 +97,3 @@ function State3() {
     4.  상세 페이지에서는 페이지의 상세 내용을 확인할 수 있으며
         구매평을 추가할 수 있습니다 (수정 및 삭제는 state2에서 풀이하였으므로 구현하지 않아도 괜찮습니다)
   */
-
-  console.log(productList);
-
-  const navigate = useNavigate();
-
-  const onNavigateDetailPage = () => {
-    navigate(`/state/detail/1`);
-  };
-
-  return (
-    <>
-      <h1>문제3</h1>
-      <h2>상품 목록</h2>
-      <ul>
-        {/* list */}
-        {/* 예시 데이터 */}
-        <ProductCard onNavigate={onNavigateDetailPage} />
-      </ul>
-    </>
-  );
-}
-export default State3;
-
-const Item = styled.li`
-  border: 1px solid #000;
-  cursor: pointer;
-  width: 300px;
-  margin: 16px auto;
-`;
-
-const S = {
-  Item,
-};
